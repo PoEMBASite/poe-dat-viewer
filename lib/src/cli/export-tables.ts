@@ -77,13 +77,15 @@ export async function exportTables (
       const datFile = readDatFile('.datc64',
         await loader.tryGetFileContents(`${tr.path}/${target.name}.datc64`) ??
         await loader.getFileContents(`${TRANSLATIONS_NONE.path}/${target.name}.datc64`))
-      const headers = importHeaders(target.name, datFile, config, schema)
-        .filter(hdr => target.columns.includes(hdr.name))
+      let headers = importHeaders(target.name, datFile, config, schema)
 
-      for (const column of target.columns) {
-        if (!headers.some(hdr => hdr.name === column)) {
-          console.error(`Table "${target.name}" doesn't have a column named "${column}".`)
-          process.exit(1)
+      if (target.columns) {
+        headers = headers.filter(hdr => target.columns!.includes(hdr.name))
+        for (const column of target.columns) {
+          if (!headers.some(hdr => hdr.name === column)) {
+            console.error(`Table "${target.name}" doesn't have a column named "${column}".`)
+            process.exit(1)
+          }
         }
       }
 
