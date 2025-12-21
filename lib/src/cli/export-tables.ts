@@ -17,7 +17,8 @@ const TRANSLATIONS_POE1 = [
   { name: 'Russian', path: 'Data/Russian' },
   { name: 'Spanish', path: 'Data/Spanish' },
   { name: 'Thai', path: 'Data/Thai' },
-  { name: 'Traditional Chinese', path: 'Data/Traditional Chinese' }
+  { name: 'Traditional Chinese', path: 'Data/Traditional Chinese' },
+  { name: 'Simplified Chinese', path: 'Data/Simplified Chinese' }
 ]
 
 const TRANSLATIONS_POE2 = [
@@ -30,11 +31,13 @@ const TRANSLATIONS_POE2 = [
   { name: 'Russian', path: 'Data/Balance/Russian' },
   { name: 'Spanish', path: 'Data/Balance/Spanish' },
   { name: 'Thai', path: 'Data/Balance/Thai' },
-  { name: 'Traditional Chinese', path: 'Data/Balance/Traditional Chinese' }
+  { name: 'Traditional Chinese', path: 'Data/Balance/Traditional Chinese' },
+  { name: 'Simplified Chinese', path: 'Data/Balance/Simplified Chinese' }
 ]
 
 function getValidFor (config: ExportConfig): ValidFor {
   return (config.patch?.startsWith('4.') || config.steam?.includes('Path of Exile 2'))
+    || config.steam?.includes('流放之路：降临')
     ? ValidFor.PoE2
     : ValidFor.PoE1
 }
