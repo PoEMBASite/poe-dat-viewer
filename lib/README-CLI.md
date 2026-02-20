@@ -50,6 +50,16 @@ npm install -g
 }
 ```
 
+### 自定义配置文件
+
+可以使用`-c`参数指定自定义配置文件：
+
+```
+npm exec pathofexile-dat -- -c files.config.json
+```
+
+`--`是npm的命令行语法，用于表示后续参数是子程序`pathofexile-data`的参数，而非npm自身的参数。
+
 ### 执行
 
 注意：下载`schema.min.json`和CDN文件需要全局的国际互联网能力：
