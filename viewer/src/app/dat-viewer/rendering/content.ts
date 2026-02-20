@@ -7,12 +7,20 @@ interface StringifyOut {
   color: string
 }
 
+function fmtFloat32 (value: number): string {
+  let text = Number(value.toPrecision(7)).toString()
+  if (!text.includes('.')) {
+    text += '.0'
+  }
+  return text
+}
+
 function integerToString (value: number, out: StringifyOut) {
   out.text = String(value)
   out.color = '#098658'
 }
 function decimalToString (value: number, out: StringifyOut) {
-  out.text = value.toLocaleString(undefined, { maximumFractionDigits: 6, minimumFractionDigits: 1 })
+  out.text = fmtFloat32(value)
   out.color = '#098658'
 }
 function integerArrayToString (value: number[], out: StringifyOut) {
@@ -20,7 +28,7 @@ function integerArrayToString (value: number[], out: StringifyOut) {
   out.color = '#098658'
 }
 function decimalArrayToString (value: number[], out: StringifyOut) {
-  out.text = `[${value.map(value => value.toLocaleString(undefined, { maximumFractionDigits: 6, minimumFractionDigits: 1 })).join(', ')}]`
+  out.text = `[${value.map(value => fmtFloat32(value)).join(', ')}]`
   out.color = '#098658'
 }
 function booleanToString (value: boolean, out: StringifyOut) {
