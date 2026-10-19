@@ -34,7 +34,7 @@ const TRANSLATIONS_POE2 = [
 ]
 
 function getValidFor (config: ExportConfig): ValidFor {
-  return (config.patch?.startsWith('4.') || config.steam?.includes('Path of Exile 2'))
+  return ((config.patch && !config.patch.startsWith('3.')) || config.steam?.includes('Path of Exile 2'))
     ? ValidFor.PoE2
     : ValidFor.PoE1
 }

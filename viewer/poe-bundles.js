@@ -10,7 +10,7 @@ async function handleRequest (event) {
 
     const proxiedUrl = (cdnPath === '/schema.min.json')
       ? 'https://github.com/poe-tool-dev/dat-schema/releases/download/latest/schema.min.json'
-      : cdnPath.startsWith('/4.')
+      : !cdnPath.startsWith('/3.')
         ? `https://patch-poe2.poecdn.com${cdnPath}`
         : `https://patch.poecdn.com${cdnPath}`
 

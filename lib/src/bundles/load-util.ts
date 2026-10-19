@@ -60,7 +60,7 @@ export interface BundleLoader {
 
 export function toCdnUrl (patchVersion: string, relPath: string): string {
   const pathname = `/${patchVersion}/${BUNDLES_DIR}/${relPath}`
-  return pathname.startsWith('/4.')
+  return !pathname.startsWith('/3.')
     ? `https://patch-poe2.poecdn.com${pathname}`
     : `https://patch.poecdn.com${pathname}`
 }
