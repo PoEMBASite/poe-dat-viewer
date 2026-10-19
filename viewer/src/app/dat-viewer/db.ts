@@ -67,7 +67,7 @@ export class DatSchemasDatabase {
       return localSchema
     }
 
-    const validFor = this.index.loader.patchVersion.startsWith('4.')
+    const validFor = !this.index.loader.patchVersion.startsWith('3.')
       ? ValidFor.PoE2
       : ValidFor.PoE1
     name = name.toLowerCase()
@@ -99,7 +99,7 @@ export class DatSchemasDatabase {
   }
 
   async preloadDataTables (totalTables: Ref<number>) {
-    const tablesDirPath = this.index.loader.patchVersion.startsWith('4.')
+    const tablesDirPath = !this.index.loader.patchVersion.startsWith('3.')
       ? 'data/balance'
       : 'data'
 
