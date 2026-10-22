@@ -2,3 +2,4 @@ node_modules
 dist
 zig-out
 .zig-cache
+pnpm-lock.yaml
