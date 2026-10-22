@@ -83,8 +83,9 @@ export async function exportTables (
       let headers = importHeaders(target.name, datFile, config, schema)
 
       if (target.columns !== undefined) {
-        headers = headers.filter(hdr => target.columns.includes(hdr.name))
-        for (const column of target.columns) {
+        const columns = target.columns
+        headers = headers.filter(hdr => columns.includes(hdr.name))
+        for (const column of columns) {
           if (!headers.some(hdr => hdr.name === column)) {
             console.error(`Table "${target.name}" doesn't have a column named "${column}".`)
             process.exit(1)
