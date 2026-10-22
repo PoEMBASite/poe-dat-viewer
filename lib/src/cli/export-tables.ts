@@ -53,7 +53,7 @@ export async function exportTables (
   if (!config.tables?.length) return
 
   console.log('Loading schema for dat files')
-  const schema = await (await fetch(SCHEMA_URL)).json()
+  const schema = await fetchSchema()
   if (schema.version !== SCHEMA_VERSION) {
     console.error('Schema has format not compatible with this package. Check for "pathofexile-dat" updates.')
     process.exit(1)
@@ -93,6 +93,21 @@ export async function exportTables (
       )
     }
   }
+}
+
+async function fetchSchema() {
+  const schemaPath = path.join(process.cwd(), '/schema.min.json')
+
+  try {
+    await fs.access(schemaPath)
+    const schema = await fs.readFile(schemaPath, { encoding: 'utf-8' })
+    return JSON.parse(schema) as SchemaFile
+  } catch {
+  }
+
+  const schema = await (await fetch(SCHEMA_URL)).json()
+  await fs.writeFile(schemaPath, JSON.stringify(schema, null, 2), { encoding: 'utf-8' })
+  return schema as unknown as SchemaFile
 }
 
 export function exportAllRows (headers: NamedHeader[], datFile: DatFile) {
